@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sartre et le Surréalisme</title>
+    <!-- Chargement de Tailwind CSS via CDN pour un style moderne et responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuration de Tailwind pour utiliser des couleurs et polices personnalisées -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Polices système pour un style "Apple" : propre, moderne et lisible
+                        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+                    },
+                    colors: {
+                        // Palette de couleurs inspirée de l'image fournie (dégradés et pastels vifs)
+                        'global-bg-start': '#B7E0FF',   // Bleu clair pour le début du dégradé de fond général
+                        'global-bg-end': '#FFD1E7',     // Rose clair pour la fin du dégradé de fond général
+
+                        // Couleurs générales du texte et de l'interface
+                        'text-dark': '#1C1C1E',          // Texte principal très sombre
+                        'text-medium': '#8E8E93',        // Texte secondaire ou des placeholders
+                        'card-bg-white': '#FFFFFF',      // Blanc pur pour les conteneurs de section principaux (cartes à l'intérieur)
+
+                        // Couleurs d'accentuation pour les titres et boutons
+                        'sartre-accent': '#FF0033',      // Rouge fluo pour Sartre (titres, boutons)
+                        'surreal-accent': '#AF52DE',     // Violet vif pour le Surréalisme (titres, boutons)
+                        'interaction-accent': '#007AFF', // Bleu vif pour l'interactivité (titres, boutons)
+
+                        // NOUVEAU: Dégradés pour les cartes des SECTIONS complètes
+                        'sartre-card-gradient-bg-start': '#FF8C8C', // Rouge clair vif pour les cartes Sartre
+                        'sartre-card-gradient-bg-end': '#FFC0CB',   // Rose clair pour les cartes Sartre
+                        'surreal-card-gradient-bg-start': '#A78BFA', // Violet clair pour les cartes Surréalisme
+                        'surreal-card-gradient-bg-end': '#ADD8E6',   // Bleu ciel pour les cartes Surréalisme
+
+                        // Interaction cards (orange doux vers rose, vert doux vers jaune) - Dégradés pour les cartes des sections interactives
+                        'gen-surreal-card-start': '#F7E6D1', // Orange doux (interaction)
+                        'gen-surreal-card-end': '#F7D8E6',   // Rose doux (interaction)
+                        'reflect-sartre-card-start': '#D1F7E1', // Vert doux (interaction)
+                        'reflect-sartre-card-end': '#E1F7D1',   // Jaune-vert doux (interaction)
+
+                        // Couleurs pour les onglets actifs (dégradé très clair pour texte noir)
+                        'tab-active-start': '#D0BFFF',  // Violet très clair (pour texte noir)
+                        'tab-active-end': '#B0E0FF',    // Bleu très clair (pour texte noir)
+
+                        // Couleurs pour le dégradé du titre de l'en-tête
+                        'title-gradient-start': '#00C6FF', // Bleu vif
+                        'title-gradient-end': '#AA67FF',   // Rose/Violet
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Styles personnalisés pour le dégradé de fond et l'animation de transition -->
+    <style>
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            /* Dégradé de fond global du site */
+            background: linear-gradient(to bottom right, var(--tw-colors-global-bg-start), var(--tw-colors-global-bg-end));
+            color: var(--tw-colors-text-dark); /* Couleur de texte principale */
+            line-height: 1.6; /* Améliore la lisibilité */
+        }
+        /* Classe pour la transition de l'opacité entre les sections, courte et fluide */
+        .content-section {
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Style des onglets actifs avec dégradé et texte noir */
+        .tab-link.active-tab {
+            background: linear-gradient(to right, var(--tw-colors-tab-active-start), var(--tw-colors-tab-active-end));
+            color: var(--tw-colors-text-dark); /* Texte noir pour l'onglet actif */
+            font-weight: 600; /* Plus gras */
+            box-shadow: 0 4px 12px rgba(74, 0, 224, 0.2); /* Ombre subtile */
+        }
+        /* Style pour les onglets inactifs sur le fond blanc de l'en-tête */
+        .tab-link {
+            color: var(--tw-colors-text-dark); /* Texte sombre par défaut pour les onglets inactifs */
+        }
+        .tab-link:not(.active-tab):hover {
+            background-color: #E2E8F0; /* Un gris très clair pour le hover */
+            color: var(--tw-colors-text-dark); /* Conserve le texte sombre sur hover */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- En-tête du site : design minimaliste et épuré -->
+    <header class="bg-card-bg-white p-4 shadow-lg rounded-b-3xl mx-auto mt-4 w-11/12 max-w-4xl">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+            <!-- Titre du site : simple et élégant avec dégradé de texte -->
+            <h1 class="text-2xl font-bold mb-2 md:mb-0 bg-gradient-to-r from-title-gradient-start to-title-gradient-end bg-clip-text text-transparent tracking-tight">Sartre et le Surréalisme</h1>
+            <nav>
+                <ul class="flex space-x-2 md:space-x-4 text-base font-medium">
+                    <!-- Liens de navigation transformés en onglets visuels -->
+                    <li><a href="#introduction" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="introduction-section">Introduction</a></li>
+                    <li><a href="#sartre" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="sartre-section">Sartre</a></li>
+                    <li><a href="#surrealism" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="surrealism-section">Surréalisme</a></li>
+                    <li><a href="#interaction" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="interaction-section">Interaction</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal : conteneur centré et spacieux -->
+    <main class="container mx-auto p-6 md:p-10 flex-grow max-w-4xl">
+
+        <!-- Section Introduction -->
+        <section id="introduction-section" class="content-section bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-text-dark tracking-tight">Introduction</h2>
+            <p class="text-base md:text-lg leading-relaxed mb-4 text-text-dark">
+                Ce site explore deux mouvements intellectuels et artistiques majeurs du 20e siècle : l'<strong>Existentialisme de Jean-Paul Sartre</strong> et le <strong>Surréalisme</strong>. Bien que différents dans leurs approches, ils partagent une volonté profonde de remettre en question les conventions, d'explorer les profondeurs de l'expérience humaine et de transformer la perception du monde et de la liberté.
+            </p>
+            <p class="text-base md:text-lg leading-relaxed text-text-dark">
+                Plongez avec nous dans ces philosophies et ces expressions artistiques qui ont marqué leur époque et continuent d'influencer notre pensée.
+            </p>
+        </section>
+
+        <!-- Section Existentialisme de Sartre (initialement masquée) -->
+        <!-- Fond de la section en blanc, et les cartes individuelles avec le dégradé rouge -->
+        <section id="sartre-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-sartre-accent tracking-tight">L'Existentialisme de Jean-Paul Sartre</h2>
+            <p class="text-base md:text-lg leading-relaxed mb-6 text-text-dark">
+                L'existentialisme de Sartre est une philosophie de la liberté et de la responsabilité radicale, née dans le contexte de l'après-guerre et de la remise en question des valeurs traditionnelles.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <!-- Concept 1: L'Existence précède l'Essence -->
+                <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-sartre-accent">L'Existence précède l'Essence</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Pour Sartre, l'homme existe d'abord, apparaît, surgit dans le monde, et ne se définit qu'après. Il n'y a pas de nature humaine prédéfinie ou de plan divin. L'homme est ce qu'il se fait. Nous sommes entièrement responsables de ce que nous devenons par nos choix et nos actions.
+                    </p>
+                </div>
+
+                <!-- Concept 2: La Liberté et la Responsabilité -->
+                <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-sartre-accent">La Liberté et la Responsabilité</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        L'homme est "condamné à être libre". Cette liberté absolue est source de vertige face à l'étendue des possibles. Chaque choix engage non seulement nous-mêmes, mais l'humanité entière.
+                    </p>
+                </div>
+
+                <!-- Concept 3: Le Pour-soi et l'En-soi -->
+                <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-sartre-accent">Le Pour-soi et l'En-soi</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Sartre distingue deux modes d'être : l'<strong>En-soi</strong> (ce qui est, la chose, l'objet, ce qui est plein et passif) et le <strong>Pour-soi</strong> (la conscience, ce qui est en manque, ce qui se projette et se fait). L'homme est Pour-soi, et par sa conscience, il confère un sens au monde.
+                    </p>
+                </div>
+
+                <!-- Concept 4: Le Regard d'Autrui et les relations -->
+                <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-sartre-accent">Le Regard d'Autrui et les Relations</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Quand autrui me regarde, je deviens un objet (un En-soi) pour sa conscience. C'est le sens de "L'enfer, c'est les autres" : non pas que les autres sont des bourreaux, mais qu'ils nous objectivent et nous renvoient à notre propre facticité.
+                    </p>
+                    <p class="text-sm leading-relaxed mt-2 text-text-dark">
+                        Les relations humaines sont une lutte constante pour la liberté. Les "dérivés de l'amour" comme le <strong>sadisme</strong> (vouloir faire de l'autre une chose) et le <strong>masochisme</strong> (vouloir devenir une chose pour l'autre) sont des tentatives vouées à l'échec de résoudre cette tension.
+                    </p>
+                </div>
+
+                <!-- Concept 5: L'Angoisse -->
+                <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-sartre-accent">L'Angoisse</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        L'<strong>angoisse</strong> est le sentiment de vertige et de responsabilité totale face à notre liberté absolue. C'est la conscience du fait que nous sommes les seuls créateurs de nos valeurs, sans appui extérieur ni excuse. Elle nous révèle notre propre liberté.
+                    </p>
+                </div>
+
+                <!-- Concept 6: L'Encroûtement -->
+                <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-sartre-accent">L'Encroûtement</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        L'<strong>encroûtement</strong> est la tendance à se figer dans un rôle, une habitude ou une identité préétablie, refusant d'assumer sa liberté de se transformer et de se dépasser. C'est une forme de mauvaise foi où l'on se laisse définir par les autres ou par son passé.
+                    </p>
+                </div>
+
+                <!-- Concept : La Mauvaise Foi -->
+                <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-sartre-accent">La Mauvaise Foi</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        C'est le fait de se mentir à soi-même sur sa propre liberté et responsabilité. Cela consiste à prétendre être un En-soi (déterminé, sans choix) alors que l'on est un Pour-soi (libre et responsable). C'est une fuite devant l'angoisse de la liberté.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Surréalisme (initialement masquée) -->
+        <!-- Fond de la section en blanc, et les cartes individuelles avec le dégradé violet/bleu -->
+        <section id="surrealism-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-surreal-accent tracking-tight">Le Surréalisme</h2>
+            <p class="text-base md:text-lg leading-relaxed mb-6 text-text-dark">
+                Né après la Première Guerre Mondiale, le surréalisme est un mouvement artistique et littéraire visant à libérer l'homme en explorant les profondeurs de l'inconscient et en défiant la logique et la raison.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Concept 1: Contexte et lien avec Dadaïsme -->
+                <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Contexte et lien avec Dadaïsme</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Issu du <strong>Dadaïsme</strong>, le surréalisme hérite de sa révolte radicale contre les valeurs et la raison perçues comme responsables des horreurs de la guerre. Cependant, il dépasse la simple destruction dadaïste pour proposer une nouvelle voie de libération de l'homme par l'exploration de l'inconscient.
+                    </p>
+                </div>
+
+                <!-- Concept 2: Influence de Freud et l'Inconscient -->
+                <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Influence de Freud (Ça, Moi, Surmoi)</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Fortement inspirés par la psychanalyse de Freud, les surréalistes cherchent à libérer le <strong>Ça</strong> (le siège des désirs et pulsions inconscients) des contraintes du <strong>Moi</strong> (la conscience rationnelle) et du <strong>Surmoi</strong> (la conscience morale et les normes sociales).
+                    </p>
+                    <p class="text-sm leading-relaxed mt-2 text-text-dark">
+                        Leur objectif est d'accéder à la "pensée véritable" de l'homme, non censurée par la société.
+                    </p>
+                </div>
+
+                <!-- Concept 3: L'Automatisme Psychique (Écriture Automatique) -->
+                <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">L'Automatisme Psychique</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Technique fondamentale du surréalisme, l'écriture automatique consiste à écrire le plus rapidement possible, sans contrôle de la raison, de la morale ou de l'esthétique, pour capter directement le flux de l'inconscient. Elle vise à révéler le "fonctionnement réel de la pensée".
+                    </p>
+                </div>
+
+                <!-- Concept 4: Le Hasard Objectif et l'Image Poétique -->
+                <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Hasard Objectif et Image Poétique</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Les surréalistes valorisent les coïncidences et les rencontres inattendues (le "hasard objectif") qui révèlent un sens caché. L'<strong>image poétique</strong> naît de la juxtaposition d'éléments disparates et sans lien logique apparent, créant un choc esthétique et un sens nouveau, souvent tiré de l'inconscient.
+                    </p>
+                </div>
+
+                <!-- Concept 5: Thèmes Majeurs -->
+                <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Thèmes Majeurs</h3>
+                    <ul class="list-disc list-inside text-md leading-relaxed text-text-dark">
+                        <li><strong>Le Rêve :</strong> Source d'inspiration majeure, considéré comme une autre forme de réalité.</li>
+                        <li><strong>L'Amour Fou :</strong> Passion irrationnelle et libératrice, défiant les conventions.</li>
+                        <li><strong>La Femme Muse :</strong> Figure inspiratrice, souvent idéalisée et mystérieuse.</li>
+                        <li><strong>Le Merveilleux et l'Insolite :</strong> La capacité à trouver l'extraordinaire dans le quotidien.</li>
+                        <li><strong>Le Hasard (Objectif) :</strong> La rencontre inattendue et significative d'éléments disparates.</li>
+                        <li><strong>La Révolution / Révolte :</strong> Vise une transformation profonde de l'homme et de la société.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Interactive (initialement masquée) -->
+        <section id="interaction-section" class="content-section hidden bg-card-bg-white p-8 rounded-lg shadow-md mb-12 opacity-0">
+            <h2 class="text-4xl font-semibold text-center mb-6 text-interaction-accent">Explorez par vous-même !</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Générateur de phrase surréaliste -->
+                <div class="flex-1 p-6 bg-gradient-to-br from-gen-surreal-card-start to-gen-surreal-card-end rounded-lg shadow-inner">
+                    <h3 class="text-2xl font-bold mb-3 text-surreal-accent">Générateur de Phrase Surréaliste</h3>
+                    <p class="mb-4 text-md text-text-dark">Laissez l'inconscient s'exprimer ! Cliquez pour générer une phrase automatique.</p>
+                    <button id="generateSurrealistSentence" class="bg-surreal-accent hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+                        Générer une phrase
+                    </button>
+                    <p id="surrealistOutput" class="mt-6 text-xl italic text-text-dark font-semibold"></p>
+                </div>
+
+                <!-- Réflexion Existentialiste -->
+                <div class="flex-1 p-6 bg-gradient-to-br from-reflect-sartre-card-start to-reflect-sartre-card-end rounded-lg shadow-inner">
+                    <h3 class="text-2xl font-bold mb-3 text-sartre-accent">Réflexion Existentialiste</h3>
+                    <p class="mb-4 text-md text-text-dark">Réfléchissez à votre propre liberté et responsabilité.</p>
+                    <textarea id="sartreReflectionInput" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-sartre-accent outline-none transition duration-200 resize-y min-h-[100px]" placeholder="Qu'est-ce que la liberté signifie pour vous ?"></textarea>
+                    <button id="reflectSartre" class="bg-sartre-accent hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-4 transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+                        Partager ma réflexion
+                    </button>
+                    <p id="sartreQuoteOutput" class="mt-6 text-xl italic text-text-dark font-semibold hidden">
+                        </p>
+                    <div id="messageBox" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-800 text-white p-6 mt-12 rounded-t-lg">
+        <div class="container mx-auto text-center text-sm">
+            <p>&copy; 2025 Exploration Philosophique et Artistique. Tous droits réservés.</p>
+            <p>Conçu pour comprendre Sartre et le Surréalisme.</p>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript pour l'interactivité des onglets et fonctionnalités -->
+    <script>
+        // Fonction pour afficher des messages personnalisés (remplace alert())
+        function showMessageBox(message, type = 'info') {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = 'mt-4 p-3 rounded-md'; // Réinitialise les classes
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'border', 'border-red-400', 'text-red-700');
+            } else if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'border', 'border-green-400', 'text-green-700');
+            } else { // info par défaut
+                messageBox.classList.add('bg-blue-100', 'border', 'border-blue-400', 'text-blue-700');
+            }
+            messageBox.classList.remove('hidden');
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 5000); // Le message disparaît après 5 secondes
+        }
+
+        // --- Gestion des onglets avec animation ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            // Fonction pour masquer toutes les sections de contenu avec fade-out
+            const hideAllSections = () => {
+                contentSections.forEach(section => {
+                    if (!section.classList.contains('hidden')) {
+                        section.style.opacity = '0'; // Commence le fade-out
+                        setTimeout(() => {
+                            section.classList.add('hidden'); // Cache après le fade-out
+                        }, 300); // Correspond à la durée de transition CSS
+                    }
+                });
+            };
+
+            // Fonction pour désactiver le style actif de tous les liens d'onglet
+            const deactivateAllTabLinks = () => {
+                tabLinks.forEach(link => {
+                    link.classList.remove('active-tab');
+                    link.classList.remove('bg-gradient-to-r', 'from-tab-active-start', 'to-tab-active-end'); // Supprime le dégradé
+                    link.classList.add('text-text-dark'); // Texte sombre par default pour l'onglet inactif
+                    // Le hover est géré par la classe CSS .tab-link:not(.active-tab):hover
+                });
+            };
+
+            // Gère le clic sur les liens d'onglet
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Empêche le comportement par défaut du lien
+
+                    const targetId = link.dataset.target; // Récupère l'ID de la section cible
+                    const targetSection = document.getElementById(targetId);
+
+                    // Si la section cible est déjà affichée, ne rien faire
+                    if (!targetSection.classList.contains('hidden') && targetSection.style.opacity === '1') {
+                        return;
+                    }
+
+                    hideAllSections(); // Masque toutes les sections (avec fade-out)
+                    deactivateAllTabLinks(); // Désactive tous les liens d'onglet
+
+                    // Petite temporisation pour permettre le fade-out de la section précédente
+                    setTimeout(() => {
+                        // Affiche la section cible et la fait apparaître avec fade-in
+                        targetSection.classList.remove('hidden');
+                        targetSection.style.opacity = '0'; // Définit l'opacité à 0 avant de la faire apparaître
+                        // Force le navigateur à appliquer le style d'opacité avant la transition
+                        void targetSection.offsetWidth;
+                        targetSection.style.opacity = '1'; // Déclenche le fade-in
+
+                        // Active le style de l'onglet cliqué
+                        link.classList.add('active-tab');
+                        link.classList.add('bg-gradient-to-r', 'from-tab-active-start', 'to-tab-active-end'); // Ajoute le dégradé
+                        // ICI: LE TEXTE DE L'ONGLET ACTIF SERA MAINTENANT NOIR
+                        link.classList.remove('text-text-dark'); // Supprime la couleur de base
+                        link.classList.add('text-text-dark'); // Ajoute la couleur noire (text-dark)
+
+                        // Défile vers la section affichée (optionnel, si le contenu est long)
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300); // Attendre que le fade-out de l'ancienne section soit terminé
+                });
+            });
+
+            // Active l'onglet "Introduction" au chargement initial
+            const initialTabLink = document.querySelector('.tab-link[data-target="introduction-section"]');
+            if (initialTabLink) {
+                initialTabLink.click();
+            }
+        });
+
+
+        // --- Générateur de phrase surréaliste ---
+        const surrealistStarts = [
+            "Une horloge fondue s'épanouit",
+            "Le cri silencieux d'une porte entrouverte",
+            "Le papillon des cavernes murmure",
+            "Sous le regard d'un œil géant",
+            "La main de l'invisible caresse",
+            "Les escaliers du souvenir s'effondrent"
+        ];
+        const surrealistMiddles = [
+            "sur le dos d'une girafe endormie",
+            "à travers un miroir brisé de certitudes",
+            "dans le jardin des pensées oubliées",
+            "où les rêves tissent des constellations",
+            "et les ombres dansent la symphonie",
+            "près du puits où la lune se maquille"
+        ];
+        const surrealistEnds = [
+            "le vent s'habille de silence.",
+            "la vérité est une illusion d'optique.",
+            "l'absurde devient la seule logique.",
+            "un cadenas rouillé garde le secret du temps.",
+            "le reflet du soleil se noie dans l'encre.",
+            "le vertige des possibles efface l'horizon."
+        ];
+
+        document.getElementById('generateSurrealistSentence').addEventListener('click', () => {
+            const start = surrealistStarts[Math.floor(Math.random() * surrealistStarts.length)];
+            const middle = surrealistMiddles[Math.floor(Math.random() * surrealistMiddles.length)];
+            const end = surrealistEnds[Math.floor(Math.random() * surrealistEnds.length)];
+            document.getElementById('surrealistOutput').textContent = `${start} ${middle}, ${end}`;
+        });
+
+        // --- Réflexion Existentialiste ---
+        const sartreQuotes = [
+            "L'existence précède l'essence et dans la liberté, l'homme se fait.",
+            "L'homme est condamné à être libre : condamné, parce qu'il ne s'est pas créé lui-même, et par ailleurs cependant libre, parce qu'une fois jeté dans le monde, il est responsable de tout ce qu'il fait.",
+            "Il n'y a pas de réalité autre que dans l'action.",
+            "L'enfer, c'est les autres."
+        ];
+
+        document.getElementById('reflectSartre').addEventListener('click', () => {
+            const reflectionInput = document.getElementById('sartreReflectionInput').value;
+            const sartreQuoteOutput = document.getElementById('sartreQuoteOutput');
+
+            if (reflectionInput.trim() === "") {
+                showMessageBox("Écris quelque chose sur la liberté pour voir une citation de Sartre !", "info");
+                sartreQuoteOutput.classList.add('hidden');
+            } else {
+                const randomQuote = sartreQuotes[Math.floor(Math.random() * sartreQuotes.length)];
+                sartreQuoteOutput.textContent = `« ${randomQuote} »`;
+                sartreQuoteOutput.classList.remove('hidden');
+                // Optionnel: On pourrait envoyer la réflexion de l'utilisateur à un "serveur" imaginaire ici.
+                showMessageBox("Merci pour ta réflexion ! Voici une pensée de Sartre.", "success");
+            }
+        });
+    </script>
+</body>
+</html>
