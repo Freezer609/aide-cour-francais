@@ -62,6 +62,7 @@
             background: linear-gradient(to bottom right, var(--tw-colors-global-bg-start), var(--tw-colors-global-bg-end));
             color: var(--tw-colors-text-dark); /* Couleur de texte principale */
             line-height: 1.6; /* Améliore la lisibilité */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
         }
         /* Classe pour la transition de l'opacité entre les sections, courte et fluide */
         .content-section {
@@ -110,7 +111,7 @@
             <!-- Titre du site : simple et élégant avec dégradé de texte -->
             <h1 class="text-2xl font-bold mb-2 md:mb-0 bg-gradient-to-r from-title-gradient-start to-title-gradient-end bg-clip-text text-transparent tracking-tight">Sartre et le Surréalisme</h1>
             <nav>
-                <ul class="flex space-x-2 md:space-x-4 text-base font-medium">
+                <ul class="flex flex-wrap justify-center gap-x-4 gap-y-3 text-base font-medium">
                     <!-- Liens de navigation transformés en onglets visuels -->
                     <li><a href="#introduction" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="introduction-section">Introduction</a></li>
                     <li><a href="#sartre" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="sartre-section">Sartre</a></li>
@@ -194,7 +195,7 @@
                     </p>
                 </div>
 
-                <!-- Concept: La Mauvaise Foi -->
+                <!-- Concept : La Mauvaise Foi -->
                 <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
                     <h3 class="text-xl font-semibold mb-2 text-sartre-accent">La Mauvaise Foi</h3>
                     <p class="text-sm leading-relaxed text-text-dark">
@@ -205,7 +206,7 @@
         </section>
 
         <!-- Surrealism Section (initially hidden) -->
-        <!-- Section background in white, and individual cards with violet/blue gradient -->
+        <!-- Fond de la section en blanc, et les cartes individuelles avec le dégradé violet/bleu -->
         <section id="surrealism-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-surreal-accent tracking-tight">Le Surréalisme</h2>
             <p class="text-base md:text-lg leading-relaxed mb-6 text-text-dark">
@@ -279,7 +280,7 @@
             </div>
         </section>
 
-        <!-- Interactive Section (initially hidden) -->
+        <!-- Interactive Section (initialement hidden) -->
         <section id="interaction-section" class="content-section hidden bg-card-bg-white p-8 rounded-lg shadow-md mb-12 opacity-0">
             <h2 class="text-4xl font-semibold text-center mb-6 text-interaction-accent">Explorez par vous-même !</h2>
             <div class="flex flex-col md:flex-row gap-8">
@@ -389,15 +390,11 @@
             const quizScoreDisplay = document.getElementById('quiz-score');
 
 
-            // Fonction pour masquer toutes les sections de contenu avec fade-out
-            const hideAllSections = () => {
+            // Fonction pour masquer toutes les sections de contenu de manière effective
+            const hideAllSectionsCompletely = () => {
                 contentSections.forEach(section => {
-                    if (!section.classList.contains('hidden')) {
-                        section.style.opacity = '0'; // Commence le fade-out
-                        setTimeout(() => {
-                            section.classList.add('hidden'); // Cache après le fade-out
-                        }, 300); // Correspond à la durée de transition CSS
-                    }
+                    section.classList.add('hidden'); // Assure display:none
+                    section.style.opacity = '0'; // Assure opacité 0 pour les transitions futures
                 });
             };
 
@@ -419,31 +416,29 @@
                     const targetId = link.dataset.target; // Récupère l'ID de la section cible
                     const targetSection = document.getElementById(targetId);
 
-                    // Si la section cible est déjà affichée, ne rien faire
+                    // Si la section cible est déjà visible, ne rien faire
                     if (!targetSection.classList.contains('hidden') && targetSection.style.opacity === '1') {
                         return;
                     }
 
-                    hideAllSections(); // Masque toutes les sections (avec fade-out)
+                    hideAllSectionsCompletely(); // Masque toutes les sections complètement
+
                     deactivateAllTabLinks(); // Désactive tous les liens d'onglet
 
-                    // Petite temporisation pour permettre le fade-out de la section précédente
-                    setTimeout(() => {
-                        // Affiche la section cible et la fait apparaître avec fade-in
-                        targetSection.classList.remove('hidden');
-                        targetSection.style.opacity = '0'; // Définit l'opacité à 0 avant de la faire apparaître
-                        // Force le navigateur à appliquer le style d'opacité avant la transition
-                        void targetSection.offsetWidth;
-                        targetSection.style.opacity = '1'; // Déclenche le fade-in
+                    // Affiche la section cible et la fait apparaître avec fade-in
+                    targetSection.classList.remove('hidden'); // Rend l'élément visible (display:block)
+                    targetSection.style.opacity = '0'; // S'assure que l'opacité de départ est 0
+                    // Force le navigateur à appliquer le style d'opacité avant la transition
+                    void targetSection.offsetWidth;
+                    targetSection.style.opacity = '1'; // Déclenche le fade-in
 
-                        // Active le style de l'onglet cliqué
-                        link.classList.add('active-tab');
-                        link.classList.add('bg-gradient-to-r', 'from-tab-active-start', 'to-tab-active-end'); // Ajoute le dégradé
-                        link.classList.add('text-text-dark'); // Le texte de l'onglet actif sera noir
+                    // Active le style de l'onglet cliqué
+                    link.classList.add('active-tab');
+                    link.classList.add('bg-gradient-to-r', 'from-tab-active-start', 'to-tab-active-end'); // Ajoute le dégradé
+                    link.classList.add('text-text-dark'); // Le texte de l'onglet actif sera noir
 
-                        // Défile vers la section affichée (optionnel, si le contenu est long)
-                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 300); // Attendre que le fade-out de l'ancienne section soit terminé
+                    // Défile vers la section affichée (optionnel, si le contenu est long)
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
 
@@ -519,8 +514,19 @@
                     if (result.candidates && result.candidates.length > 0 &&
                         result.candidates[0].content && result.candidates[0].content.parts &&
                         result.candidates[0].content.parts.length > 0) {
-                        const jsonString = result.candidates[0].content.parts[0].text;
-                        quizData = JSON.parse(jsonString); // Stocke les données du quiz
+                        let jsonString = result.candidates[0].content.parts[0].text;
+                        // Supprimer les éventuels blocs de code Markdown si l'IA les ajoute
+                        jsonString = jsonString.replace(/```json\s*|```/g, '').trim();
+
+                        try {
+                            quizData = JSON.parse(jsonString); // Stocke les données du quiz
+                        } catch (parseError) {
+                            console.error("Erreur de parsing JSON du quiz:", parseError);
+                            console.error("JSON brut reçu:", jsonString);
+                            showMessageBox("Erreur de format du quiz. Veuillez réessayer ou contacter le support.", "error");
+                            quizLoading.classList.add('hidden');
+                            return; // Arrête la fonction si le parsing échoue
+                        }
 
                         quizContainer.innerHTML = ''; // Efface le contenu précédent
                         quizData.forEach((q, qIndex) => {
@@ -541,11 +547,11 @@
                         });
                         submitQuizButton.classList.remove('hidden'); // Affiche le bouton de soumission
                     } else {
-                        showMessageBox("Impossible de générer le quiz. Veuillez réessayer.", "error");
+                        showMessageBox("Impossible de générer le quiz. La réponse de l'IA est vide ou mal formée.", "error");
                     }
                 } catch (error) {
-                    console.error("Erreur lors de la génération du quiz:", error);
-                    showMessageBox("Une erreur est survenue lors de la génération du quiz. Vérifiez la console pour plus de détails.", "error");
+                    console.error("Erreur lors de la génération du quiz (fetch ou réseau):", error);
+                    showMessageBox("Une erreur est survenue lors de la génération du quiz. Vérifiez votre connexion ou réessayez.", "error");
                 } finally {
                     quizLoading.classList.add('hidden'); // Masque l'indicateur de chargement
                 }
@@ -554,6 +560,12 @@
             submitQuizButton.addEventListener('click', () => {
                 let score = 0;
                 const totalQuestions = quizData.length;
+                // Assure que le quiz a des questions pour éviter la division par zéro
+                if (totalQuestions === 0) {
+                    quizScoreDisplay.textContent = `Aucune question à noter. Générez un quiz d'abord.`;
+                    quizScoreDisplay.classList.remove('hidden');
+                    return;
+                }
                 const pointsPerQuestion = 10 / totalQuestions; // Le quiz est sur 10 points
 
                 quizData.forEach((q, qIndex) => {
