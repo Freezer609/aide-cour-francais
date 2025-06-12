@@ -30,7 +30,7 @@
                         'surreal-accent': '#AF52DE',     // Violet vif pour le Surréalisme (titres, boutons)
                         'interaction-accent': '#007AFF', // Bleu vif pour l'interactivité (titres, boutons)
 
-                        // NOUVEAU: Dégradés pour les cartes des SECTIONS complètes
+                        // Dégradés pour les cartes des SECTIONS complètes
                         'sartre-card-gradient-bg-start': '#FF8C8C', // Rouge clair vif pour les cartes Sartre
                         'sartre-card-gradient-bg-end': '#FFC0CB',   // Rose clair pour les cartes Sartre
                         'surreal-card-gradient-bg-start': '#A78BFA', // Violet clair pour les cartes Surréalisme
@@ -82,6 +82,24 @@
             background-color: #E2E8F0; /* Un gris très clair pour le hover */
             color: var(--tw-colors-text-dark); /* Conserve le texte sombre sur hover */
         }
+
+        /* Styles pour l'animation de la Modale Freud */
+        #freud-modal {
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        #freud-modal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #freud-modal .fixed.inset-0.bg-black { /* Cibler l'overlay */
+            transition: opacity 0.3s ease-out;
+            opacity: 0;
+        }
+        #freud-modal.is-visible .fixed.inset-0.bg-black {
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -98,6 +116,7 @@
                     <li><a href="#sartre" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="sartre-section">Sartre</a></li>
                     <li><a href="#surrealism" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="surrealism-section">Surréalisme</a></li>
                     <li><a href="#interaction" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="interaction-section">Interaction</a></li>
+                    <li><a href="#quiz" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="quiz-section">Quiz</a></li>
                 </ul>
             </nav>
         </div>
@@ -112,9 +131,7 @@
             <p class="text-base md:text-lg leading-relaxed mb-4 text-text-dark">
                 Ce site explore deux mouvements intellectuels et artistiques majeurs du 20e siècle : l'<strong>Existentialisme de Jean-Paul Sartre</strong> et le <strong>Surréalisme</strong>. Bien que différents dans leurs approches, ils partagent une volonté profonde de remettre en question les conventions, d'explorer les profondeurs de l'expérience humaine et de transformer la perception du monde et de la liberté.
             </p>
-            <p class="text-base md:text-lg leading-relaxed text-text-dark">
-                Plongez avec nous dans ces philosophies et ces expressions artistiques qui ont marqué leur époque et continuent d'influencer notre pensée.
-            </p>
+            <!-- Phrase supprimée ici -->
         </section>
 
         <!-- Section Existentialisme de Sartre (initialement masquée) -->
@@ -177,7 +194,7 @@
                     </p>
                 </div>
 
-                <!-- Concept : La Mauvaise Foi -->
+                <!-- Concept: La Mauvaise Foi -->
                 <div class="p-6 bg-gradient-to-br from-sartre-card-gradient-bg-start to-sartre-card-gradient-bg-end rounded-2xl shadow-sm">
                     <h3 class="text-xl font-semibold mb-2 text-sartre-accent">La Mauvaise Foi</h3>
                     <p class="text-sm leading-relaxed text-text-dark">
@@ -187,8 +204,8 @@
             </div>
         </section>
 
-        <!-- Section Surréalisme (initialement masquée) -->
-        <!-- Fond de la section en blanc, et les cartes individuelles avec le dégradé violet/bleu -->
+        <!-- Surrealism Section (initially hidden) -->
+        <!-- Section background in white, and individual cards with violet/blue gradient -->
         <section id="surrealism-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-surreal-accent tracking-tight">Le Surréalisme</h2>
             <p class="text-base md:text-lg leading-relaxed mb-6 text-text-dark">
@@ -196,7 +213,15 @@
             </p>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Concept 1: Contexte et lien avec Dadaïsme -->
+                <!-- Définition du Surréalisme (première carte) -->
+                <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Définition du Surréalisme</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Le Surréalisme, tel que défini par André Breton, est un automatisme psychique pur par lequel on se propose d'exprimer, soit verbalement, soit par écrit, soit de toute autre manière, le fonctionnement réel de la pensée en l'absence de tout contrôle exercé par la raison, en dehors de toute préoccupation esthétique ou morale.
+                    </p>
+                </div>
+
+                <!-- Contexte et lien avec Dadaïsme -->
                 <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
                     <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Contexte et lien avec Dadaïsme</h3>
                     <p class="text-sm leading-relaxed text-text-dark">
@@ -204,49 +229,57 @@
                     </p>
                 </div>
 
-                <!-- Concept 2: Influence de Freud et l'Inconscient -->
+                <!-- Influence de Freud et l'Inconscient -->
                 <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
                     <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Influence de Freud (Ça, Moi, Surmoi)</h3>
-                    <p class="text-sm leading-relaxed text-text-dark">
+                    <p id="freud-bio-text" class="text-sm leading-relaxed text-text-dark">
                         Fortement inspirés par la psychanalyse de Freud, les surréalistes cherchent à libérer le <strong>Ça</strong> (le siège des désirs et pulsions inconscients) des contraintes du <strong>Moi</strong> (la conscience rationnelle) et du <strong>Surmoi</strong> (la conscience morale et les normes sociales).
                     </p>
                     <p class="text-sm leading-relaxed mt-2 text-text-dark">
                         Leur objectif est d'accéder à la "pensée véritable" de l'homme, non censurée par la société.
                     </p>
+                    <!-- Bouton pour ouvrir la modale de la biographie de Freud -->
+                    <button id="openFreudModal" class="bg-surreal-accent hover:opacity-85 text-white font-bold py-2 px-4 rounded-lg mt-4 transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+                        Lire la biographie de Freud
+                    </button>
                 </div>
 
-                <!-- Concept 3: L'Automatisme Psychique (Écriture Automatique) -->
+                <!-- Écriture Automatique -->
                 <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
-                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">L'Automatisme Psychique</h3>
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Écriture Automatique</h3>
                     <p class="text-sm leading-relaxed text-text-dark">
                         Technique fondamentale du surréalisme, l'écriture automatique consiste à écrire le plus rapidement possible, sans contrôle de la raison, de la morale ou de l'esthétique, pour capter directement le flux de l'inconscient. Elle vise à révéler le "fonctionnement réel de la pensée".
                     </p>
                 </div>
 
-                <!-- Concept 4: Le Hasard Objectif et l'Image Poétique -->
+                <!-- Les Thèmes Surréalistes -->
                 <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
-                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Hasard Objectif et Image Poétique</h3>
-                    <p class="text-sm leading-relaxed text-text-dark">
-                        Les surréalistes valorisent les coïncidences et les rencontres inattendues (le "hasard objectif") qui révèlent un sens caché. L'<strong>image poétique</strong> naît de la juxtaposition d'éléments disparates et sans lien logique apparent, créant un choc esthétique et un sens nouveau, souvent tiré de l'inconscient.
-                    </p>
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Les Thèmes Surréalistes</h3>
+                    <ul class="list-disc list-inside text-md leading-relaxed text-text-dark">
+                        <li><strong>Le Hasard :</strong> Valorisation des coïncidences significatives ("hasard objectif") et des rencontres inattendues qui révèlent un sens caché.</li>
+                        <li><strong>L'Anarchie / Révolte :</strong> Rupture avec les conventions sociales, morales et artistiques établies.</li>
+                        <li><strong>La Femme Muse :</strong> Figure inspiratrice, souvent idéalisée, mystérieuse, au pouvoir subversif.</li>
+                        <li><strong>Le Rêve et l'Inconscient :</strong> Exploration des mondes oniriques et des profondeurs de l'esprit, source de créativité.</li>
+                        <li><strong>La Folie :</strong> Intérêt pour les états de conscience altérés, perçus comme des voies d'accès à une réalité supérieure.</li>
+                        <li><strong>L'Amour Fou :</strong> Passion démesurée et irrationnelle, défiant les normes et libératrice.</li>
+                        <li><strong>La Liberté :</strong> Recherche d'une liberté absolue de l'esprit et de l'expression, affranchie de toute contrainte.</li>
+                    </ul>
                 </div>
 
-                <!-- Concept 5: Thèmes Majeurs -->
+                <!-- Traits Majeurs -->
                 <div class="p-6 bg-gradient-to-br from-surreal-card-gradient-bg-start to-surreal-card-gradient-bg-end rounded-2xl shadow-sm">
-                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Thèmes Majeurs</h3>
+                    <h3 class="text-xl font-semibold mb-2 text-surreal-accent">Traits Majeurs</h3>
                     <ul class="list-disc list-inside text-md leading-relaxed text-text-dark">
-                        <li><strong>Le Rêve :</strong> Source d'inspiration majeure, considéré comme une autre forme de réalité.</li>
-                        <li><strong>L'Amour Fou :</strong> Passion irrationnelle et libératrice, défiant les conventions.</li>
-                        <li><strong>La Femme Muse :</strong> Figure inspiratrice, souvent idéalisée et mystérieuse.</li>
-                        <li><strong>Le Merveilleux et l'Insolite :</strong> La capacité à trouver l'extraordinaire dans le quotidien.</li>
-                        <li><strong>Le Hasard (Objectif) :</strong> La rencontre inattendue et significative d'éléments disparates.</li>
-                        <li><strong>La Révolution / Révolte :</strong> Vise une transformation profonde de l'homme et de la société.</li>
+                        <li>1. La <strong>libération des contraintes</strong>: Le surréalisme vise à affranchir l'esprit et l'expression des carcans de la logique, de la morale et des conventions sociales.</li>
+                        <li>2. Les <strong>comportements propices à dévoiler le surréel dans l'existence ordinaire</strong>: Il s'agit de la recherche active de coïncidences, de rencontres fortuites et de "hasards objectifs" qui révèlent un sens caché ou une beauté inattendue dans le quotidien.</li>
+                        <li>3. Une <strong>subversion radicale des valeurs et genres littéraires</strong>: Le surréalisme défie les normes établies, bouscule les hiérarchies artistiques et remet en question la raison, la moralité et les formes traditionnelles de l'art et de la littérature, prônant une liberté créatrice totale.</li>
+                        <li>4. Une <strong>pratique systématique de techniques de création visant à libérer l'inconscient ou à faire surgir une surréalité imprévisible</strong>: Cela inclut des méthodes comme l'écriture automatique, les collages, les cadavres exquis, les rêves éveillés dirigés, etc., toutes conçues pour contourner la conscience rationnelle et accéder aux forces créatrices de l'inconscient.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Section Interactive (initialement masquée) -->
+        <!-- Interactive Section (initially hidden) -->
         <section id="interaction-section" class="content-section hidden bg-card-bg-white p-8 rounded-lg shadow-md mb-12 opacity-0">
             <h2 class="text-4xl font-semibold text-center mb-6 text-interaction-accent">Explorez par vous-même !</h2>
             <div class="flex flex-col md:flex-row gap-8">
@@ -276,6 +309,24 @@
             </div>
         </section>
 
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-interaction-accent tracking-tight">Quiz sur l'Existentialisme et le Surréalisme</h2>
+            <div class="flex flex-col items-center">
+                <button id="generateQuiz" class="bg-interaction-accent hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+                    Générer un nouveau quiz
+                </button>
+                <p id="quiz-loading" class="mt-4 text-text-medium hidden">Génération du quiz... Veuillez patienter.</p>
+                <div id="quiz-container" class="mt-8 w-full max-w-2xl">
+                    <!-- Les questions du quiz seront insérées ici par JavaScript -->
+                </div>
+                <button id="submitQuiz" class="bg-sartre-accent hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-8 hidden transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+                    Soumettre le quiz
+                </button>
+                <div id="quiz-score" class="mt-6 text-2xl font-bold text-text-dark hidden"></div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Pied de page -->
@@ -286,7 +337,23 @@
         </div>
     </footer>
 
-    <!-- Script JavaScript pour l'interactivité des onglets et fonctionnalités -->
+    <!-- Modale Biographie Freud -->
+    <div id="freud-modal" class="hidden fixed inset-0 z-40 flex items-center justify-center">
+        <!-- Overlay -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 modal-overlay"></div>
+        <!-- Contenu de la Modale -->
+        <div class="bg-card-bg-white p-8 rounded-lg shadow-xl z-50 w-11/12 max-w-2xl relative">
+            <h3 class="text-2xl font-bold mb-4 text-surreal-accent">Biographie de Freud</h3>
+            <p class="text-base leading-relaxed text-text-dark mb-6">
+                Fortement inspirés par la psychanalyse de Freud, les surréalistes cherchent à libérer le <strong>Ça</strong> (le siège des désirs et pulsions inconscients) des contraintes du <strong>Moi</strong> (la conscience rationnelle) et du <strong>Surmoi</strong> (la conscience morale et les normes sociales). Leur objectif est d'accéder à la "pensée véritable" de l'homme, non censurée par la société.
+            </p>
+            <button id="closeFreudModal" class="bg-surreal-accent hover:opacity-85 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+                Retour
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript pour l'interactivité des onglets et les fonctionnalités -->
     <script>
         // Fonction pour afficher des messages personnalisés (remplace alert())
         function showMessageBox(message, type = 'info') {
@@ -306,10 +373,21 @@
             }, 5000); // Le message disparaît après 5 secondes
         }
 
+        let quizData = []; // Stocke les données du quiz globalement
+
         // --- Gestion des onglets avec animation ---
         document.addEventListener('DOMContentLoaded', () => {
             const tabLinks = document.querySelectorAll('.tab-link');
             const contentSections = document.querySelectorAll('.content-section');
+            const freudModal = document.getElementById('freud-modal');
+            const openFreudModalButton = document.getElementById('openFreudModal');
+            const closeFreudModalButton = document.getElementById('closeFreudModal');
+            const generateQuizButton = document.getElementById('generateQuiz');
+            const quizLoading = document.getElementById('quiz-loading');
+            const quizContainer = document.getElementById('quiz-container');
+            const submitQuizButton = document.getElementById('submitQuiz');
+            const quizScoreDisplay = document.getElementById('quiz-score');
+
 
             // Fonction pour masquer toutes les sections de contenu avec fade-out
             const hideAllSections = () => {
@@ -328,7 +406,7 @@
                 tabLinks.forEach(link => {
                     link.classList.remove('active-tab');
                     link.classList.remove('bg-gradient-to-r', 'from-tab-active-start', 'to-tab-active-end'); // Supprime le dégradé
-                    link.classList.add('text-text-dark'); // Texte sombre par default pour l'onglet inactif
+                    link.classList.add('text-text-dark'); // Texte sombre par défaut pour l'onglet inactif
                     // Le hover est géré par la classe CSS .tab-link:not(.active-tab):hover
                 });
             };
@@ -361,9 +439,7 @@
                         // Active le style de l'onglet cliqué
                         link.classList.add('active-tab');
                         link.classList.add('bg-gradient-to-r', 'from-tab-active-start', 'to-tab-active-end'); // Ajoute le dégradé
-                        // ICI: LE TEXTE DE L'ONGLET ACTIF SERA MAINTENANT NOIR
-                        link.classList.remove('text-text-dark'); // Supprime la couleur de base
-                        link.classList.add('text-text-dark'); // Ajoute la couleur noire (text-dark)
+                        link.classList.add('text-text-dark'); // Le texte de l'onglet actif sera noir
 
                         // Défile vers la section affichée (optionnel, si le contenu est long)
                         targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -376,6 +452,121 @@
             if (initialTabLink) {
                 initialTabLink.click();
             }
+
+            // --- Fonctionnalité Modale Freud ---
+            if (openFreudModalButton && freudModal && closeFreudModalButton) {
+                openFreudModalButton.addEventListener('click', () => {
+                    freudModal.classList.remove('hidden');
+                    // Petite temporisation pour déclencher la transition CSS
+                    setTimeout(() => {
+                        freudModal.classList.add('is-visible');
+                    }, 10);
+                });
+
+                closeFreudModalButton.addEventListener('click', () => {
+                    freudModal.classList.remove('is-visible'); // Déclenche la transition CSS de fermeture
+                    // Masque la modale après la fin de la transition
+                    setTimeout(() => {
+                        freudModal.classList.add('hidden');
+                    }, 300); // Correspond à la durée de transition CSS
+                });
+            }
+
+            // --- Fonctionnalité de Génération du Quiz ---
+            generateQuizButton.addEventListener('click', async () => {
+                quizContainer.innerHTML = ''; // Efface le quiz précédent
+                quizScoreDisplay.classList.add('hidden');
+                submitQuizButton.classList.add('hidden');
+                quizLoading.classList.remove('hidden'); // Affiche l'indicateur de chargement
+
+                let chatHistory = [];
+                const prompt = "Génère un quiz de 5 questions à choix multiples sur l'existentialisme de Sartre et le surréalisme. Chaque question doit avoir 3 options. Pour chaque question, indique la question, les options (tableau de chaînes de caractères) et l'index de la bonne réponse (0 pour la première option, 1 pour la deuxième, etc.). Le score total du quiz sera sur 10 points. Les questions doivent être pertinentes et couvrent différents aspects des deux sujets. Réponds uniquement avec un tableau JSON de questions, comme suit : [{ \"question\": \"Question 1?\", \"options\": [\"Option A\", \"Option B\", \"Option C\"], \"correct_answer_index\": 0 }, ...]";
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                const payload = {
+                    contents: chatHistory,
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "ARRAY",
+                            items: {
+                                type: "OBJECT",
+                                properties: {
+                                    "question": { "type": "STRING" },
+                                    "options": {
+                                        "type": "ARRAY",
+                                        "items": { "type": "STRING" }
+                                    },
+                                    "correct_answer_index": { "type": "NUMBER" }
+                                },
+                                "propertyOrdering": ["question", "options", "correct_answer_index"]
+                            }
+                        }
+                    }
+                };
+
+                const apiKey = ""; // Canvas fournira ceci à l'exécution
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const jsonString = result.candidates[0].content.parts[0].text;
+                        quizData = JSON.parse(jsonString); // Stocke les données du quiz
+
+                        quizContainer.innerHTML = ''; // Efface le contenu précédent
+                        quizData.forEach((q, qIndex) => {
+                            const questionDiv = document.createElement('div');
+                            questionDiv.classList.add('mb-6', 'p-4', 'bg-gray-50', 'rounded-lg', 'shadow-md');
+                            questionDiv.innerHTML = `<p class="font-semibold text-lg mb-3 text-text-dark">Question ${qIndex + 1}: ${q.question}</p>`;
+
+                            q.options.forEach((option, oIndex) => {
+                                const optionLabel = document.createElement('label');
+                                optionLabel.classList.add('block', 'mb-2', 'cursor-pointer', 'text-text-dark');
+                                optionLabel.innerHTML = `
+                                    <input type="radio" name="question${qIndex}" value="${oIndex}" class="mr-2 accent-surreal-accent">
+                                    ${option}
+                                `;
+                                questionDiv.appendChild(optionLabel);
+                            });
+                            quizContainer.appendChild(questionDiv);
+                        });
+                        submitQuizButton.classList.remove('hidden'); // Affiche le bouton de soumission
+                    } else {
+                        showMessageBox("Impossible de générer le quiz. Veuillez réessayer.", "error");
+                    }
+                } catch (error) {
+                    console.error("Erreur lors de la génération du quiz:", error);
+                    showMessageBox("Une erreur est survenue lors de la génération du quiz. Vérifiez la console pour plus de détails.", "error");
+                } finally {
+                    quizLoading.classList.add('hidden'); // Masque l'indicateur de chargement
+                }
+            });
+
+            submitQuizButton.addEventListener('click', () => {
+                let score = 0;
+                const totalQuestions = quizData.length;
+                const pointsPerQuestion = 10 / totalQuestions; // Le quiz est sur 10 points
+
+                quizData.forEach((q, qIndex) => {
+                    const selectedOption = document.querySelector(`input[name="question${qIndex}"]:checked`);
+                    if (selectedOption && parseInt(selectedOption.value) === q.correct_answer_index) {
+                        score += pointsPerQuestion;
+                    }
+                });
+
+                quizScoreDisplay.textContent = `Votre score : ${score.toFixed(1)} / 10 points`;
+                quizScoreDisplay.classList.remove('hidden');
+                showMessageBox("Quiz soumis ! Votre score est affiché.", "success");
+            });
         });
 
 
@@ -431,7 +622,7 @@
                 const randomQuote = sartreQuotes[Math.floor(Math.random() * sartreQuotes.length)];
                 sartreQuoteOutput.textContent = `« ${randomQuote} »`;
                 sartreQuoteOutput.classList.remove('hidden');
-                // Optionnel: On pourrait envoyer la réflexion de l'utilisateur à un "serveur" imaginaire ici.
+                // Optional: We could send the user's reflection to an imaginary "server" here.
                 showMessageBox("Merci pour ta réflexion ! Voici une pensée de Sartre.", "success");
             }
         });
