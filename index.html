@@ -78,7 +78,7 @@
         }
         /* Style pour les onglets inactifs sur le fond blanc de l'en-tête */
         .tab-link {
-            color: var(--tw-colors-text-dark); /* Texte sombre par défaut pour les onglets inactifs */
+            color: var(--tw-colors-text-dark); /* Texte sombre par défaut pour l'onglet inactif */
         }
         .tab-link:not(.active-tab):hover {
             background-color: #E2E8F0; /* Un gris très clair pour le hover */
@@ -344,10 +344,27 @@
         <!-- Overlay -->
         <div class="fixed inset-0 bg-black bg-opacity-50 modal-overlay"></div>
         <!-- Contenu de la Modale -->
-        <div class="bg-card-bg-white p-8 rounded-lg shadow-xl z-50 w-11/12 max-w-2xl relative">
-            <h3 class="text-2xl font-bold mb-4 text-surreal-accent">Biographie de Freud</h3>
+        <div class="bg-card-bg-white p-8 rounded-lg shadow-xl z-50 w-11/12 max-w-2xl relative max-h-[90vh] overflow-y-auto">
+            <h3 class="text-2xl font-bold mb-4 text-surreal-accent">Sigmund Freud : Le Père de la Psychanalyse</h3>
+            <p class="text-base leading-relaxed text-text-dark mb-4">
+                Sigmund Freud (1856-1939) était un neurologue autrichien et le fondateur de la psychanalyse, une méthode clinique pour traiter la psychopathologie par le dialogue entre un patient et un psychanalyste. Ses théories ont profondément influencé non seulement la psychologie, mais aussi la littérature, l'art et la culture occidentale du 20e siècle.
+            </p>
+            <h4 class="text-xl font-semibold mb-2 text-surreal-accent">Concepts Clés de la Psychanalyse :</h4>
+            <ul class="list-disc list-inside text-base leading-relaxed text-text-dark mb-4">
+                <li><strong>L'Inconscient :</strong> Freud postula l'existence d'un vaste domaine de l'esprit qui échappe à la conscience, mais qui influence fortement nos pensées, nos sentiments et nos comportements. C'est le réservoir des désirs refoulés, des souvenirs oubliés et des pulsions primitives.</li>
+                <li><strong>La Structure de la Personnalité (Ça, Moi, Surmoi) :</strong>
+                    <ul class="list-circle list-inside ml-4">
+                        <li><strong>Le Ça (Id) :</strong> La partie la plus primitive et instinctive de la personnalité, présente dès la naissance. Il opère selon le principe de plaisir, cherchant la gratification immédiate des désirs. Les surréalistes cherchaient à libérer le "Ça".</li>
+                        <li><strong>Le Moi (Ego) :</strong> La partie de la personnalité qui gère la réalité. Il opère selon le principe de réalité, cherchant des moyens réalistes et socialement acceptables de satisfaire les désirs du Ça. C'est la conscience rationnelle.</li>
+                        <li><strong>Le Surmoi (Superego) :</strong> Développé à partir des interactions sociales et de l'intériorisation des normes morales et des idéaux parentaux et sociétaux. Il représente la conscience et l'idéal du moi. C'est la conscience morale.</li>
+                    </ul>
+                </li>
+                <li><strong>Le Rêve :</strong> Freud considérait le rêve comme la "voie royale vers l'inconscient". Il analysait les rêves (leur contenu manifeste et leur contenu latent) pour comprendre les désirs et conflits inconscients du patient.</li>
+                <li><strong>Le Refoulement :</strong> Un mécanisme de défense inconscient par lequel des pensées, souvenirs ou désirs douloureux ou inacceptables sont expulsés de la conscience.</li>
+                <li><strong>Le Complexe d'Œdipe :</strong> Théorie centrale décrivant les sentiments d'amour et de rivalité qu'un enfant éprouverait envers ses parents de sexe opposé et de même sexe respectivement, et qui se résoudrait par l'identification au parent de même sexe.</li>
+            </ul>
             <p class="text-base leading-relaxed text-text-dark mb-6">
-                Fortement inspirés par la psychanalyse de Freud, les surréalistes cherchent à libérer le <strong>Ça</strong> (le siège des désirs et pulsions inconscients) des contraintes du <strong>Moi</strong> (la conscience rationnelle) et du <strong>Surmoi</strong> (la conscience morale et les normes sociales). Leur objectif est d'accéder à la "pensée véritable" de l'homme, non censurée par la société.
+                L'influence de Freud sur le surréalisme est immense. Les artistes et écrivains surréalistes ont adopté ses concepts de l'inconscient et du rêve comme des sources inépuisables de créativité, cherchant à contourner la raison et la logique pour accéder à une "sur-réalité" plus profonde et plus authentique.
             </p>
             <button id="closeFreudModal" class="bg-surreal-accent hover:opacity-85 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
                 Retour
@@ -503,7 +520,7 @@
 
                 // IMPORTANT : Remplacez "" par votre clé API Gemini de Google AI Studio.
                 // Par exemple : const apiKey = "YOUR_API_KEY_HERE";
-                const apiKey = "AIzaSyBLPhVELZfVMROtut5eSXOELLMRi_4bAqs"; // <--- Insérez votre clé API ici pour le déploiement sur GitHub ou ailleurs.
+                const apiKey = "AIzaSyDypVl4SsnHAf6zjV4K9jKk9oVpEDl95Y4"; // <--- Insérez votre clé API ici pour le déploiement sur GitHub ou ailleurs.
 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -592,6 +609,29 @@
 
                 quizData.forEach((q, qIndex) => {
                     const selectedOption = document.querySelector(`input[name="question${qIndex}"]:checked`);
+                    const questionDiv = document.querySelector(`#quiz-container > div:nth-child(${qIndex + 1})`);
+                    const optionLabels = questionDiv.querySelectorAll('label');
+                    const radioButtons = questionDiv.querySelectorAll('input[type="radio"]');
+
+                    // Désactiver tous les boutons radio de la question
+                    radioButtons.forEach(radio => radio.disabled = true);
+
+                    optionLabels.forEach((label, oIndex) => {
+                        // Supprime les classes de feedback précédentes
+                        label.classList.remove('bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+
+                        // Applique la couleur verte à la bonne réponse
+                        if (oIndex === q.correct_answer_index) {
+                            label.classList.add('bg-green-100', 'text-green-800', 'font-semibold', 'rounded-md', 'p-1');
+                        }
+
+                        // Si une mauvaise réponse a été sélectionnée, la marquer en rouge
+                        if (selectedOption && parseInt(selectedOption.value) === oIndex && oIndex !== q.correct_answer_index) {
+                            label.classList.add('bg-red-100', 'text-red-800', 'font-semibold', 'rounded-md', 'p-1');
+                        }
+                    });
+
+
                     if (selectedOption && parseInt(selectedOption.value) === q.correct_answer_index) {
                         score += pointsPerQuestion;
                     }
@@ -600,6 +640,7 @@
                 quizScoreDisplay.textContent = `Votre score : ${score.toFixed(1)} / 10 points`;
                 quizScoreDisplay.classList.remove('hidden');
                 showMessageBox("Quiz soumis ! Votre score est affiché.", "success");
+                submitQuizButton.classList.add('hidden'); // Masquer le bouton Soumettre après la soumission
             });
         });
 
