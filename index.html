@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Configuration de Tailwind pour utiliser des couleurs et polices personnalisées -->
     <script>
+        // Le bloc tailwind.config DOIT être après le chargement du script tailwindcss.com
         tailwind.config = {
             theme: {
                 extend: {
@@ -518,7 +519,18 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
+
+                    // Vérifie si la réponse HTTP est ok (statut 200-299)
+                    if (!response.ok) {
+                        const errorBody = await response.json().catch(() => ({ message: "Erreur inconnue de l'API" }));
+                        console.error("Erreur API lors de la génération du quiz:", response.status, errorBody);
+                        showMessageBox(`Erreur de l'API (${response.status}): ${errorBody.message || "Impossible de générer le quiz."}`, "error");
+                        quizLoading.classList.add('hidden');
+                        return;
+                    }
+
                     const result = await response.json();
+                    console.log("Réponse complète de l'IA (pour débogage):", result); // Pour le débogage
 
                     if (result.candidates && result.candidates.length > 0 &&
                         result.candidates[0].content && result.candidates[0].content.parts &&
@@ -531,8 +543,8 @@
                             quizData = JSON.parse(jsonString); // Stocke les données du quiz
                         } catch (parseError) {
                             console.error("Erreur de parsing JSON du quiz:", parseError);
-                            console.error("JSON brut reçu:", jsonString);
-                            showMessageBox("Erreur de format du quiz. Veuillez réessayer ou contacter le support.", "error");
+                            console.error("JSON brut reçu (après nettoyage):", jsonString);
+                            showMessageBox("Erreur de format du quiz. La réponse de l'IA n'est pas un JSON valide.", "error");
                             quizLoading.classList.add('hidden');
                             return; // Arrête la fonction si le parsing échoue
                         }
@@ -556,6 +568,7 @@
                         });
                         submitQuizButton.classList.remove('hidden'); // Affiche le bouton de soumission
                     } else {
+                        // Si la structure des candidats n'est pas celle attendue
                         showMessageBox("Impossible de générer le quiz. La réponse de l'IA est vide ou mal formée.", "error");
                     }
                 } catch (error) {
