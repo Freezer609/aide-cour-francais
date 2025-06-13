@@ -36,6 +36,8 @@
                         'sartre-card-gradient-bg-end': '#FFC0CB',   // Rose clair pour les cartes Sartre
                         'surreal-card-gradient-bg-start': '#A78BFA', // Violet clair pour les cartes Surréalisme
                         'surreal-card-gradient-bg-end': '#ADD8E6',   // Bleu ciel pour les cartes Surréalisme
+                        'zola-card-gradient-bg-start': '#9AE6B4',   // Vert clair pour Zola
+                        'zola-card-gradient-bg-end': '#D6FFD6',     // Vert très clair pour Zola
 
                         // Interaction cards (orange doux vers rose, vert doux vers jaune) - Dégradés pour les cartes des sections interactives
                         'gen-surreal-card-start': '#F7E6D1', // Orange doux (interaction)
@@ -78,7 +80,7 @@
         }
         /* Style pour les onglets inactifs sur le fond blanc de l'en-tête */
         .tab-link {
-            color: var(--tw-colors-text-dark); /* Texte sombre par défaut pour l'onglet inactif */
+            color: var(--tw-colors-text-dark); /* Texte sombre par défaut pour les onglets inactifs */
         }
         .tab-link:not(.active-tab):hover {
             background-color: #E2E8F0; /* Un gris très clair pour le hover */
@@ -117,6 +119,7 @@
                     <li><a href="#introduction" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="introduction-section">Introduction</a></li>
                     <li><a href="#sartre" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="sartre-section">Sartre</a></li>
                     <li><a href="#surrealism" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="surrealism-section">Surréalisme</a></li>
+                    <li><a href="#zola" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="zola-section">Zola</a></li>
                     <li><a href="#interaction" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="interaction-section">Interaction</a></li>
                     <li><a href="#quiz" class="tab-link px-4 py-2 rounded-full transition duration-300 ease-in-out" data-target="quiz-section">Quiz</a></li>
                 </ul>
@@ -131,9 +134,8 @@
         <section id="introduction-section" class="content-section bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-text-dark tracking-tight">Introduction</h2>
             <p class="text-base md:text-lg leading-relaxed mb-4 text-text-dark">
-                Ce site explore deux mouvements intellectuels et artistiques majeurs du 20e siècle : l'<strong>Existentialisme de Jean-Paul Sartre</strong> et le <strong>Surréalisme</strong>. Bien que différents dans leurs approches, ils partagent une volonté profonde de remettre en question les conventions, d'explorer les profondeurs de l'expérience humaine et de transformer la perception du monde et de la liberté.
+                Ce site explore trois mouvements intellectuels et artistiques majeurs : l'<strong>Existentialisme de Jean-Paul Sartre</strong>, le <strong>Surréalisme</strong>, et le <strong>Naturalisme d'Émile Zola</strong>. Bien que différents dans leurs approches, ils partagent une volonté profonde de remettre en question les conventions, d'explorer les profondeurs de l'expérience humaine et de comprendre les forces qui façonnent l'individu.
             </p>
-            <!-- Phrase supprimée ici -->
         </section>
 
         <!-- Section Existentialisme de Sartre (initialement masquée) -->
@@ -206,7 +208,7 @@
             </div>
         </section>
 
-        <!-- Surrealism Section (initially hidden) -->
+        <!-- Surrealism Section (initialement masquée) -->
         <!-- Fond de la section en blanc, et les cartes individuelles avec le dégradé violet/bleu -->
         <section id="surrealism-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-surreal-accent tracking-tight">Le Surréalisme</h2>
@@ -281,7 +283,54 @@
             </div>
         </section>
 
-        <!-- Interactive Section (initially hidden) -->
+        <!-- Zola's Determinism Section (Nouvelle section, initialement masquée) -->
+        <section id="zola-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-green-700 tracking-tight">Le Déterminisme d'Émile Zola</h2>
+            <p class="text-base md:text-lg leading-relaxed mb-6 text-text-dark">
+                Le naturalisme d'Émile Zola est fondé sur une vision déterministe de l'individu, où le destin des personnages est fortement influencé par des facteurs inéluctables. Zola applique les méthodes scientifiques pour étudier comment ces forces façonnent les comportements humains.
+            </p>
+
+            <h3 class="text-2xl font-semibold mb-4 text-green-700">Les Trois Piliers du Déterminisme :</h3>
+            <p class="text-base leading-relaxed mb-6 text-text-dark">
+                Pour Zola, les individus sont le produit de l'interaction de trois forces majeures : l'**hérédité** (leur bagage génétique), le **milieu social** (leur environnement et les conditions de vie) et le **moment historique** (l'époque dans laquelle ils vivent).
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <!-- Concept 1: L'Hérédité -->
+                <div class="p-6 bg-gradient-to-br from-zola-card-gradient-bg-start to-zola-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-green-800">L'Hérédité</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Zola étudie l'influence des tares et des qualités héritées sur le comportement et le destin des individus. Ses personnages des Rougon-Macquart sont souvent marqués par des prédispositions génétiques (alcoolisme, folie, ambition) qui se transmettent de génération en génération.
+                    </p>
+                </div>
+
+                <!-- Concept 2: Le Milieu Social -->
+                <div class="p-6 bg-gradient-to-br from-zola-card-gradient-bg-start to-zola-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-green-800">Le Milieu Social</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Le quartier, la profession, la pauvreté ou la richesse, les relations sociales... le milieu dans lequel évolue un personnage est, pour Zola, un facteur déterminant de ses actions et de son évolution. Il n'y a pas de liberté individuelle hors de l'influence de cet environnement.
+                    </p>
+                </div>
+
+                <!-- Concept 3: Le Moment Historique -->
+                <div class="p-6 bg-gradient-to-br from-zola-card-gradient-bg-start to-zola-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-green-800">Le Moment Historique</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        L'époque et ses événements (industrialisation, Second Empire, transformations sociales) pèsent également sur les destins individuels. Les personnages de Zola sont souvent pris dans le tourbillon de l'histoire, leurs vies étant façonnées par les forces collectives de leur temps.
+                    </p>
+                </div>
+
+                <!-- Concept 4: Le Roman Expérimental -->
+                <div class="p-6 bg-gradient-to-br from-zola-card-gradient-bg-start to-zola-card-gradient-bg-end rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2 text-green-800">Le Roman Expérimental</h3>
+                    <p class="text-sm leading-relaxed text-text-dark">
+                        Zola se considérait comme un scientifique observant et "expérimentant" sur ses personnages dans le cadre de ses romans. Il voulait démontrer, à travers ses récits, comment l'hérédité et le milieu expliquent les comportements humains, sans jugement moral.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Section (initialement hidden) -->
         <section id="interaction-section" class="content-section hidden bg-card-bg-white p-8 rounded-lg shadow-md mb-12 opacity-0">
             <h2 class="text-4xl font-semibold text-center mb-6 text-interaction-accent">Explorez par vous-même !</h2>
             <div class="flex flex-col md:flex-row gap-8">
@@ -493,7 +542,7 @@
                 quizLoading.classList.remove('hidden'); // Affiche l'indicateur de chargement
 
                 let chatHistory = [];
-                const prompt = "Génère un quiz de 5 questions à choix multiples sur l'existentialisme de Sartre et le surréalisme. Chaque question doit avoir 3 options. Pour chaque question, indique la question, les options (tableau de chaînes de caractères) et l'index de la bonne réponse (0 pour la première option, 1 pour la deuxième, etc.). Le score total du quiz sera sur 10 points. Les questions doivent être pertinentes et couvrent différents aspects des deux sujets. Réponds uniquement avec un tableau JSON de questions, comme suit : [{ \"question\": \"Question 1?\", \"options\": [\"Option A\", \"Option B\", \"Option C\"], \"correct_answer_index\": 0 }, ...]";
+                const prompt = "Génère un quiz de 5 questions à choix multiples sur l'existentialisme de Sartre, le surréalisme et le déterminisme de Zola. Chaque question doit avoir 3 options. Pour chaque question, indique la question, les options (tableau de chaînes de caractères) et l'index de la bonne réponse (0 pour la première option, 1 pour la deuxième, etc.). Le score total du quiz sera sur 10 points. Les questions doivent être pertinentes et couvrent différents aspects des trois sujets. Réponds uniquement avec un tableau JSON de questions, comme suit : [{ \"question\": \"Question 1?\", \"options\": [\"Option A\", \"Option B\", \"Option C\"], \"correct_answer_index\": 0 }, ...]";
                 chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
                 const payload = {
@@ -520,7 +569,7 @@
 
                 // IMPORTANT : Remplacez "" par votre clé API Gemini de Google AI Studio.
                 // Par exemple : const apiKey = "YOUR_API_KEY_HERE";
-                const apiKey = "AIzaSyDypVl4SsnHAf6zjV4K9jKk9oVpEDl95Y4"; // <--- Insérez votre clé API ici pour le déploiement sur GitHub ou ailleurs.
+                const apiKey = "AIzaSyBLPhVELZfVMROtut5eSXOELLMRi_4bAqs"; // <--- Insérez votre clé API ici pour le déploiement sur GitHub ou ailleurs.
 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -652,7 +701,13 @@
             "Le papillon des cavernes murmure",
             "Sous le regard d'un œil géant",
             "La main de l'invisible caresse",
-            "Les escaliers du souvenir s'effondrent"
+            "Les escaliers du souvenir s'effondrent",
+            "La ville endormie rêve",
+            "Un miroir sans reflet danse",
+            "Le soupir des étoiles tombe",
+            "Le fleuve du temps se fige",
+            "Une plume invisible écrit",
+            "Les chemins de l'esprit s'entrelacent"
         ];
         const surrealistMiddles = [
             "sur le dos d'une girafe endormie",
@@ -660,7 +715,13 @@
             "dans le jardin des pensées oubliées",
             "où les rêves tissent des constellations",
             "et les ombres dansent la symphonie",
-            "près du puits où la lune se maquille"
+            "près du puits où la lune se maquille",
+            "derrière le voile des apparences",
+            "au carrefour des illusions volantes",
+            "sous la pluie des souvenirs lointains",
+            "entre les mailles de l'absurdité",
+            "dans le souffle d'un désir lointain",
+            "par-delà les frontières du silence"
         ];
         const surrealistEnds = [
             "le vent s'habille de silence.",
@@ -668,7 +729,13 @@
             "l'absurde devient la seule logique.",
             "un cadenas rouillé garde le secret du temps.",
             "le reflet du soleil se noie dans l'encre.",
-            "le vertige des possibles efface l'horizon."
+            "le vertige des possibles efface l'horizon.",
+            "les murmures du subconscient révèlent l'invisible.",
+            "la conscience s'évade dans un éclat de folie.",
+            "le vide se remplit de sens inattendus.",
+            "l'écho du passé se tait enfin.",
+            "le monde se brise en fragments d'or.",
+            "un rire lointain résonne dans l'éternité."
         ];
 
         document.getElementById('generateSurrealistSentence').addEventListener('click', () => {
@@ -683,7 +750,13 @@
             "L'existence précède l'essence et dans la liberté, l'homme se fait.",
             "L'homme est condamné à être libre : condamné, parce qu'il ne s'est pas créé lui-même, et par ailleurs cependant libre, parce qu'une fois jeté dans le monde, il est responsable de tout ce qu'il fait.",
             "Il n'y a pas de réalité autre que dans l'action.",
-            "L'enfer, c'est les autres."
+            "L'enfer, c'est les autres.",
+            "La vie n'a pas de sens a priori. C'est à nous de lui en donner un.",
+            "Nous sommes ce que nous faisons de nous-mêmes.",
+            "Chaque homme doit inventer son chemin.",
+            "Si l'homme est libre, il est aussi angoisse.",
+            "L'homme est un projet qui se jette vers un avenir.",
+            "La liberté n'est pas une propriété de l'être, mais l'être de l'homme."
         ];
 
         document.getElementById('reflectSartre').addEventListener('click', () => {
