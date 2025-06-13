@@ -44,6 +44,8 @@
                         'gen-surreal-card-end': '#F7D8E6',   // Rose doux (interaction)
                         'reflect-sartre-card-start': '#D1F7E1', // Vert doux (interaction)
                         'reflect-sartre-card-end': '#E1F7D1',   // Jaune-vert doux (interaction)
+                        'reflect-zola-card-start': '#BFE7B5', // Vert pâle pour Zola interaction
+                        'reflect-zola-card-end': '#E0FFD0',   // Vert très pâle pour Zola interaction
 
                         // Couleurs pour les onglets actifs (dégradé très clair pour texte noir)
                         'tab-active-start': '#D0BFFF',  // Violet très clair (pour texte noir)
@@ -60,7 +62,7 @@
     <!-- Styles personnalisés pour le dégradé de fond et l'animation de transition -->
     <style>
         body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, '"Helvetica Neue"', Arial, '"Noto Sans"', sans-serif, '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"';
             /* Dégradé de fond global du site */
             background: linear-gradient(to bottom right, var(--tw-colors-global-bg-start), var(--tw-colors-global-bg-end));
             color: var(--tw-colors-text-dark); /* Couleur de texte principale */
@@ -80,7 +82,7 @@
         }
         /* Style pour les onglets inactifs sur le fond blanc de l'en-tête */
         .tab-link {
-            color: var(--tw-colors-text-dark); /* Texte sombre par défaut pour les onglets inactifs */
+            color: var(--tw-colors-text-dark); /* Texte sombre par défaut pour l'onglet inactif */
         }
         .tab-link:not(.active-tab):hover {
             background-color: #E2E8F0; /* Un gris très clair pour le hover */
@@ -292,7 +294,7 @@
 
             <h3 class="text-2xl font-semibold mb-4 text-green-700">Les Trois Piliers du Déterminisme :</h3>
             <p class="text-base leading-relaxed mb-6 text-text-dark">
-                Pour Zola, les individus sont le produit de l'interaction de trois forces majeures : l'**hérédité** (leur bagage génétique), le **milieu social** (leur environnement et les conditions de vie) et le **moment historique** (l'époque dans laquelle ils vivent).
+                Pour Zola, les individus sont le produit de l'interaction de trois forces majeures : l'<strong>hérédité</strong> (leur bagage génétique), le <strong>milieu social</strong> (leur environnement et les conditions de vie) et le <strong>moment historique</strong> (l'époque dans laquelle ils vivent). Ces facteurs agissent de manière interdépendante pour déterminer les actions et le destin des personnages.
             </p>
 
             <div class="grid md:grid-cols-2 gap-6 md:gap-8">
@@ -333,9 +335,9 @@
         <!-- Interactive Section (initialement hidden) -->
         <section id="interaction-section" class="content-section hidden bg-card-bg-white p-8 rounded-lg shadow-md mb-12 opacity-0">
             <h2 class="text-4xl font-semibold text-center mb-6 text-interaction-accent">Explorez par vous-même !</h2>
-            <div class="flex flex-col md:flex-row gap-8">
+            <div class="flex flex-col md:flex-row flex-wrap gap-8 justify-center">
                 <!-- Générateur de phrase surréaliste -->
-                <div class="flex-1 p-6 bg-gradient-to-br from-gen-surreal-card-start to-gen-surreal-card-end rounded-lg shadow-inner">
+                <div class="flex-1 min-w-[300px] p-6 bg-gradient-to-br from-gen-surreal-card-start to-gen-surreal-card-end rounded-lg shadow-inner">
                     <h3 class="text-2xl font-bold mb-3 text-surreal-accent">Générateur de Phrase Surréaliste</h3>
                     <p class="mb-4 text-md text-text-dark">Laissez l'inconscient s'exprimer ! Cliquez pour générer une phrase automatique.</p>
                     <button id="generateSurrealistSentence" class="bg-surreal-accent hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
@@ -345,7 +347,7 @@
                 </div>
 
                 <!-- Réflexion Existentialiste -->
-                <div class="flex-1 p-6 bg-gradient-to-br from-reflect-sartre-card-start to-reflect-sartre-card-end rounded-lg shadow-inner">
+                <div class="flex-1 min-w-[300px] p-6 bg-gradient-to-br from-reflect-sartre-card-start to-reflect-sartre-card-end rounded-lg shadow-inner">
                     <h3 class="text-2xl font-bold mb-3 text-sartre-accent">Réflexion Existentialiste</h3>
                     <p class="mb-4 text-md text-text-dark">Réfléchissez à votre propre liberté et responsabilité.</p>
                     <textarea id="sartreReflectionInput" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-sartre-accent outline-none transition duration-200 resize-y min-h-[100px]" placeholder="Qu'est-ce que la liberté signifie pour vous ?"></textarea>
@@ -357,12 +359,26 @@
                     <div id="messageBox" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
                         </div>
                 </div>
+
+                <!-- Comprendre votre Déterminisme (Nouvelle interaction Zola) -->
+                <div class="flex-1 min-w-[300px] p-6 bg-gradient-to-br from-reflect-zola-card-start to-reflect-zola-card-end rounded-lg shadow-inner">
+                    <h3 class="text-2xl font-bold mb-3 text-green-700">Comprendre votre Déterminisme</h3>
+                    <p class="mb-4 text-md text-text-dark">Selon Zola, l'hérédité, le milieu et le moment historique nous façonnent. Lequel de ces facteurs pensez-vous vous a le plus influencé ? Expliquez brièvement.</p>
+                    <textarea id="zolaDeterminismInput" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-green-700 outline-none transition duration-200 resize-y min-h-[100px]" placeholder="Ex: Mon éducation dans une petite ville m'a..."></textarea>
+                    <button id="reflectZola" class="bg-green-700 hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg mt-4 transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
+                        Réfléchir à mon Déterminisme
+                    </button>
+                    <p id="zolaQuoteOutput" class="mt-6 text-xl italic text-text-dark font-semibold hidden">
+                        </p>
+                    <div id="zolaMessageBox" class="hidden mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                        </div>
+                </div>
             </div>
         </section>
 
         <!-- Quiz Section -->
         <section id="quiz-section" class="content-section hidden bg-card-bg-white p-8 md:p-10 rounded-3xl shadow-xl mb-8 opacity-0">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-interaction-accent tracking-tight">Quiz sur l'Existentialisme et le Surréalisme</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-interaction-accent tracking-tight">Quiz sur l'Existentialisme, le Surréalisme et le Déterminisme</h2>
             <div class="flex flex-col items-center">
                 <button id="generateQuiz" class="bg-interaction-accent hover:opacity-85 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
                     Générer un nouveau quiz
@@ -384,7 +400,7 @@
     <footer class="bg-gray-800 text-white p-6 mt-12 rounded-t-lg">
         <div class="container mx-auto text-center text-sm">
             <p>&copy; 2025 Exploration Philosophique et Artistique. Tous droits réservés.</p>
-            <p>Conçu pour comprendre Sartre et le Surréalisme.</p>
+            <p>Conçu pour comprendre Sartre, le Surréalisme et Zola.</p>
         </div>
     </footer>
 
@@ -400,7 +416,7 @@
             </p>
             <h4 class="text-xl font-semibold mb-2 text-surreal-accent">Concepts Clés de la Psychanalyse :</h4>
             <ul class="list-disc list-inside text-base leading-relaxed text-text-dark mb-4">
-                <li><strong>L'Inconscient :</strong> Freud postula l'existence d'un vaste domaine de l'esprit qui échappe à la conscience, mais qui influence fortement nos pensées, nos sentiments et nos comportements. C'est le réservoir des désirs refoulés, des souvenirs oubliés et des pulsions primitives.</li>
+                <li><strong>L'Inconscient :</strong> Freud postule l'existence d'un vaste domaine de l'esprit qui échappe à la conscience, mais qui influence fortement nos pensées, nos sentiments et nos comportements. C'est le réservoir des désirs refoulés, des souvenirs oubliés et des pulsions primitives.</li>
                 <li><strong>La Structure de la Personnalité (Ça, Moi, Surmoi) :</strong>
                     <ul class="list-circle list-inside ml-4">
                         <li><strong>Le Ça (Id) :</strong> La partie la plus primitive et instinctive de la personnalité, présente dès la naissance. Il opère selon le principe de plaisir, cherchant la gratification immédiate des désirs. Les surréalistes cherchaient à libérer le "Ça".</li>
@@ -424,8 +440,8 @@
     <!-- JavaScript pour l'interactivité des onglets et les fonctionnalités -->
     <script>
         // Fonction pour afficher des messages personnalisés (remplace alert())
-        function showMessageBox(message, type = 'info') {
-            const messageBox = document.getElementById('messageBox');
+        function showMessageBox(message, type = 'info', targetBoxId = 'messageBox') {
+            const messageBox = document.getElementById(targetBoxId);
             messageBox.textContent = message;
             messageBox.className = 'mt-4 p-3 rounded-md'; // Réinitialise les classes
             if (type === 'error') {
@@ -534,88 +550,87 @@
                 });
             }
 
-            // --- Fonctionnalité de Génération du Quiz ---
+            // --- Fonctionnalité de Génération du Quiz (Réécrite) ---
             generateQuizButton.addEventListener('click', async () => {
                 quizContainer.innerHTML = ''; // Efface le quiz précédent
                 quizScoreDisplay.classList.add('hidden');
                 submitQuizButton.classList.add('hidden');
                 quizLoading.classList.remove('hidden'); // Affiche l'indicateur de chargement
 
-                let chatHistory = [];
-                const prompt = "Génère un quiz de 5 questions à choix multiples sur l'existentialisme de Sartre, le surréalisme et le déterminisme de Zola. Chaque question doit avoir 3 options. Pour chaque question, indique la question, les options (tableau de chaînes de caractères) et l'index de la bonne réponse (0 pour la première option, 1 pour la deuxième, etc.). Le score total du quiz sera sur 10 points. Les questions doivent être pertinentes et couvrent différents aspects des trois sujets. Réponds uniquement avec un tableau JSON de questions, comme suit : [{ \"question\": \"Question 1?\", \"options\": [\"Option A\", \"Option B\", \"Option C\"], \"correct_answer_index\": 0 }, ...]";
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-
-                const payload = {
-                    contents: chatHistory,
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                        responseSchema: {
-                            type: "ARRAY",
-                            items: {
-                                type: "OBJECT",
-                                properties: {
-                                    "question": { "type": "STRING" },
-                                    "options": {
-                                        "type": "ARRAY",
-                                        "items": { "type": "STRING" }
-                                    },
-                                    "correct_answer_index": { "type": "NUMBER" }
-                                },
-                                "propertyOrdering": ["question", "options", "correct_answer_index"]
-                            }
-                        }
-                    }
-                };
-
-                // IMPORTANT : Remplacez "" par votre clé API Gemini de Google AI Studio.
-                // Par exemple : const apiKey = "YOUR_API_KEY_HERE";
-                const apiKey = "AIzaSyBLPhVELZfVMROtut5eSXOELLMRi_4bAqs"; // <--- Insérez votre clé API ici pour le déploiement sur GitHub ou ailleurs.
-
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                // RÉCUPÉRATION DE LA CLÉ API : IL FAUT QUE TU COLLES TA CLÉ ICI !
+                // Tu dois obtenir cette clé depuis Google AI Studio (https://aistudio.google.com/)
+                const apiKey = "AIzaSyDypVl4SsnHAf6zjV4K9jKk9oVpEDl95Y4"; // <--- COLLES TA CLÉ API VALIDE ICI ENTRE LES GUILLEMETS !
 
                 if (!apiKey) {
-                    showMessageBox("Clé API manquante pour la génération du quiz. Veuillez l'ajouter dans le code.", "error");
+                    showMessageBox("Clé API manquante. Veuillez insérer votre clé API Gemini dans le code pour générer le quiz.", "error");
                     quizLoading.classList.add('hidden');
                     return;
                 }
 
                 try {
+                    const prompt = "Génère un quiz de 20 questions à choix multiples sur l'existentialisme de Sartre, le surréalisme et le déterminisme de Zola. Chaque question doit avoir 3 options. Pour chaque question, indique la question, les options (tableau de chaînes de caractères) et l'index de la bonne réponse (0 pour la première option, 1 pour la deuxième, etc.). Le score total du quiz sera sur 10 points. Les questions doivent être pertinentes et couvrent différents aspects des trois sujets. Réponds uniquement avec un tableau JSON de questions, comme suit : [{ \"question\": \"Question 1?\", \"options\": [\"Option A\", \"Option B\", \"Option C\"], \"correct_answer_index\": 0 }, ...]";
+                    
+                    const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+
+                    const payload = {
+                        contents: chatHistory,
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                            responseSchema: {
+                                type: "ARRAY",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        "question": { "type": "STRING" },
+                                        "options": {
+                                            "type": "ARRAY",
+                                            "items": { "type": "STRING" }
+                                        },
+                                        "correct_answer_index": { "type": "NUMBER" }
+                                    },
+                                    "propertyOrdering": ["question", "options", "correct_answer_index"]
+                                }
+                            }
+                        }
+                    };
+
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
                     const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
 
-                    // Vérifie si la réponse HTTP est ok (statut 200-299)
                     if (!response.ok) {
-                        const errorBody = await response.json().catch(() => ({ message: "Erreur inconnue de l'API" }));
-                        console.error("Erreur API lors de la génération du quiz:", response.status, errorBody);
-                        showMessageBox(`Erreur de l'API (${response.status}): ${errorBody.message || "Impossible de générer le quiz."}`, "error");
-                        quizLoading.classList.add('hidden');
+                        const errorData = await response.json().catch(() => ({ message: "Réponse d'erreur non JSON." }));
+                        console.error("Erreur API lors de la génération du quiz:", response.status, errorData);
+                        showMessageBox(`Erreur de l'API (${response.status}): ${errorData.error?.message || "Impossible de générer le quiz."}`, "error");
                         return;
                     }
 
                     const result = await response.json();
-                    console.log("Réponse complète de l'IA (pour débogage):", result); // Pour le débogage
 
+                    // Vérifie si la structure de la réponse de l'IA est valide
                     if (result.candidates && result.candidates.length > 0 &&
                         result.candidates[0].content && result.candidates[0].content.parts &&
                         result.candidates[0].content.parts.length > 0) {
+                        
                         let jsonString = result.candidates[0].content.parts[0].text;
-                        // Supprimer les éventuels blocs de code Markdown si l'IA les ajoute
+                        // Nettoie la chaîne JSON des éventuels blocs de code Markdown
                         jsonString = jsonString.replace(/```json\s*|```/g, '').trim();
 
                         try {
-                            quizData = JSON.parse(jsonString); // Stocke les données du quiz
+                            quizData = JSON.parse(jsonString); // Parse le JSON et stocke les données du quiz
                         } catch (parseError) {
                             console.error("Erreur de parsing JSON du quiz:", parseError);
                             console.error("JSON brut reçu (après nettoyage):", jsonString);
                             showMessageBox("Erreur de format du quiz. La réponse de l'IA n'est pas un JSON valide.", "error");
-                            quizLoading.classList.add('hidden');
                             return; // Arrête la fonction si le parsing échoue
                         }
 
-                        quizContainer.innerHTML = ''; // Efface le contenu précédent
+                        // Construction de l'affichage du quiz
+                        quizContainer.innerHTML = '';
                         quizData.forEach((q, qIndex) => {
                             const questionDiv = document.createElement('div');
                             questionDiv.classList.add('mb-6', 'p-4', 'bg-gray-50', 'rounded-lg', 'shadow-md');
@@ -633,13 +648,13 @@
                             quizContainer.appendChild(questionDiv);
                         });
                         submitQuizButton.classList.remove('hidden'); // Affiche le bouton de soumission
+                        showMessageBox("Quiz généré avec succès ! Répondez aux questions.", "success");
                     } else {
-                        // Si la structure des candidats n'est pas celle attendue
                         showMessageBox("Impossible de générer le quiz. La réponse de l'IA est vide ou mal formée.", "error");
                     }
                 } catch (error) {
                     console.error("Erreur lors de la génération du quiz (fetch ou réseau):", error);
-                    showMessageBox("Une erreur est survenue lors de la génération du quiz. Vérifiez votre connexion ou réessayez.", "error");
+                    showMessageBox("Une erreur est survenue lors de la génération du quiz. Vérifiez votre connexion internet.", "error");
                 } finally {
                     quizLoading.classList.add('hidden'); // Masque l'indicateur de chargement
                 }
@@ -648,7 +663,7 @@
             submitQuizButton.addEventListener('click', () => {
                 let score = 0;
                 const totalQuestions = quizData.length;
-                // Assure que le quiz a des questions pour éviter la division par zéro
+                
                 if (totalQuestions === 0) {
                     quizScoreDisplay.textContent = `Aucune question à noter. Générez un quiz d'abord.`;
                     quizScoreDisplay.classList.remove('hidden');
@@ -662,7 +677,7 @@
                     const optionLabels = questionDiv.querySelectorAll('label');
                     const radioButtons = questionDiv.querySelectorAll('input[type="radio"]');
 
-                    // Désactiver tous les boutons radio de la question
+                    // Désactiver tous les boutons radio de la question après soumission
                     radioButtons.forEach(radio => radio.disabled = true);
 
                     optionLabels.forEach((label, oIndex) => {
@@ -679,7 +694,6 @@
                             label.classList.add('bg-red-100', 'text-red-800', 'font-semibold', 'rounded-md', 'p-1');
                         }
                     });
-
 
                     if (selectedOption && parseInt(selectedOption.value) === q.correct_answer_index) {
                         score += pointsPerQuestion;
@@ -707,7 +721,10 @@
             "Le soupir des étoiles tombe",
             "Le fleuve du temps se fige",
             "Une plume invisible écrit",
-            "Les chemins de l'esprit s'entrelacent"
+            "Les chemins de l'esprit s'entrelacent",
+            "Le silence des cathédrales s'élève",
+            "La lumière des songes se brise",
+            "Les masques des passants s'animent"
         ];
         const surrealistMiddles = [
             "sur le dos d'une girafe endormie",
@@ -721,7 +738,10 @@
             "sous la pluie des souvenirs lointains",
             "entre les mailles de l'absurdité",
             "dans le souffle d'un désir lointain",
-            "par-delà les frontières du silence"
+            "par-delà les frontières du silence",
+            "devant le mur des désirs inachevés",
+            "sur les traces d'un chemin inconnu",
+            "au cœur d'une forêt de paradoxes"
         ];
         const surrealistEnds = [
             "le vent s'habille de silence.",
@@ -735,7 +755,10 @@
             "le vide se remplit de sens inattendus.",
             "l'écho du passé se tait enfin.",
             "le monde se brise en fragments d'or.",
-            "un rire lointain résonne dans l'éternité."
+            "un rire lointain résonne dans l'éternité.",
+            "le temps se dissout en poussière d'étoiles.",
+            "la mémoire se déforme comme un rêve brumeux.",
+            "l'oubli est une porte vers l'infini."
         ];
 
         document.getElementById('generateSurrealistSentence').addEventListener('click', () => {
@@ -756,7 +779,11 @@
             "Chaque homme doit inventer son chemin.",
             "Si l'homme est libre, il est aussi angoisse.",
             "L'homme est un projet qui se jette vers un avenir.",
-            "La liberté n'est pas une propriété de l'être, mais l'être de l'homme."
+            "La liberté n'est pas une propriété de l'être, mais l'être de l'homme.",
+            "Être, c'est choisir de devenir.",
+            "La subjectivité est le point de départ de l'existentialisme.",
+            "Le délaissement est le sentiment que Dieu n'existe pas.",
+            "L'homme est seul, sans excuses."
         ];
 
         document.getElementById('reflectSartre').addEventListener('click', () => {
@@ -772,6 +799,30 @@
                 sartreQuoteOutput.classList.remove('hidden');
                 // Optional: We could send the user's reflection to an imaginary "server" here.
                 showMessageBox("Merci pour ta réflexion ! Voici une pensée de Sartre.", "success");
+            }
+        });
+
+        // --- Réflexion Déterminisme Zola (Nouvelle fonction) ---
+        const zolaQuotes = [
+            "L'homme est le produit de son milieu et de son hérédité.",
+            "Le roman est une expérience sur la nature humaine, soumise aux lois du déterminisme.",
+            "La science met la vérité en lumière, elle ne la crée pas.",
+            "Nous sommes des machines humaines soumises aux fatalités du sang et du tempérament.",
+            "Le monde est une immense étude où nous avons chacun notre rôle à jouer, fatalement."
+        ];
+
+        document.getElementById('reflectZola').addEventListener('click', () => {
+            const zolaDeterminismInput = document.getElementById('zolaDeterminismInput').value;
+            const zolaQuoteOutput = document.getElementById('zolaQuoteOutput');
+
+            if (zolaDeterminismInput.trim() === "") {
+                showMessageBox("Dis-moi ce qui t'a influencé pour voir une citation de Zola !", "info", 'zolaMessageBox');
+                zolaQuoteOutput.classList.add('hidden');
+            } else {
+                const randomQuote = zolaQuotes[Math.floor(Math.random() * zolaQuotes.length)];
+                zolaQuoteOutput.textContent = `« ${randomQuote} »`;
+                zolaQuoteOutput.classList.remove('hidden');
+                showMessageBox("Intéressant ! Voici une pensée de Zola sur le déterminisme.", "success", 'zolaMessageBox');
             }
         });
     </script>
